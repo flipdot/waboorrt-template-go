@@ -24,7 +24,7 @@ func (b *Bot) NextAction(state *waboorrt.GameState) actions.Action {
 		constants.WalkEast,
 	}
 
-	switch rand.Intn(4) {
+	switch rand.Intn(5) {
 	case 0:
 		dir := dirs[rand.Intn(len(dirs))]
 		b.Debug(fmt.Sprintf("going %s", dir))
@@ -43,6 +43,10 @@ func (b *Bot) NextAction(state *waboorrt.GameState) actions.Action {
 
 		b.Debug(fmt.Sprintf("throwing at (%.0f %.0f)", p.X, p.Y))
 		return actions.NewThrowOp(p)
+
+	case 3:
+		b.Debug("Charging energy")
+		return actions.NewChargeOp(p)
 
 	default:
 		b.Debug("idling")
